@@ -55,18 +55,18 @@ class Alvos(Node):
         self.angy=msg.pose.pose.orientation.y
         self.angz=msg.pose.pose.orientation.z
         self.angw=msg.pose.pose.orientation.w
-        self.arco = math.acos(self.angz)
-        self.ang = 2*(self.arco-(np.pi)/2)+(np.pi)/2
+        self.arco = math.asin(self.angz)
+        self.ang = self.arco*2
         self.angc = np.degrees(self.ang)
-        if (self.angw>0):
-            self.angc=((-1)*(self.angc-90))+90
+        if (self.angw<0):
+            self.angc=(-1)*(self.angc)
 
         self.vx1=self.alvo1x-self.x
         self.vy1=self.alvo1y-self.y
         self.tang1 = self.vy1/self.vx1
         self.ang1=math.atan(self.tang1)
         self.angg1 = np.degrees(self.ang1)
-        if(self.vx1>0):
+        if(self.vx1<0):
             self.angg1+=180
         self.d1=self.angg1-self.angc
 
